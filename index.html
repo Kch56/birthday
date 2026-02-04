@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Feliz Cumpleaños Sophia!</title>
+    <style>
+        :root {
+            --tb-purple: #702082;
+            --tb-yellow: #ffcd00;
+            --tb-fire: #c41230; 
+            --tb-hot: #f36c21;  
+            --tb-mild: #ffcd00; 
+            --baja: #00e5d1;
+        }
+
+        body {
+            background-color: #f3f3f3;
+            font-family: 'Arial Black', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            padding: 35px 25px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            border-top: 15px solid var(--tb-purple);
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: var(--tb-purple);
+            font-size: 1.8rem;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .name {
+            color: var(--tb-purple);
+            font-size: 3.2rem;
+            display: block;
+            margin-bottom: 15px;
+            line-height: 1;
+        }
+
+        .main-message {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        /* Sauce Packet Styling */
+        .sauce-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .packet {
+            height: 85px;
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 10px;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.15);
+        }
+
+        .packet-label {
+            position: absolute;
+            top: 6px;
+            left: 12px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            font-family: sans-serif;
+            opacity: 0.9;
+        }
+
+        .packet-text {
+            font-size: 1.05rem;
+            font-weight: bold;
+            font-style: italic;
+            text-align: center;
+            max-width: 85%;
+            line-height: 1.2;
+        }
+
+        .fire { background-color: var(--tb-fire); transform: rotate(1deg); }
+        .hot { background-color: var(--tb-hot); transform: rotate(-1.5deg); }
+        .mild { background-color: var(--tb-mild); color: #333; transform: rotate(1.2deg); }
+
+        .btn {
+            background-color: var(--baja);
+            color: #005a52;
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: 900;
+            width: 100%;
+            box-shadow: 0 5px 0px #00a89a;
+            transition: all 0.1s;
+        }
+
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0px #00a89a;
+        }
+
+        /* Animation */
+        .falling-item {
+            position: absolute;
+            top: -50px;
+            z-index: 5;
+            pointer-events: none;
+            font-size: 30px;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>¡Feliz Cumpleaños!</h1>
+        <span class="name">SOPHIA</span>
+        
+        <p class="main-message">
+            Wishing you a day that’s better than a perfectly toasted chicken quesadilla and a cold Baja Blast. 
+            You're a really good friend, and I can't wait to celebrate with a massive Taco Bell run soon. 
+            <strong>Live Más!</strong>
+        </p>
+
+        <div class="sauce-grid">
+            <div class="packet mild">
+                <span class="packet-label">MILD</span>
+                <span class="packet-text">"Hope your day is awesome!"</span>
+            </div>
+
+            <div class="packet hot">
+                <span class="packet-label">HOT</span>
+                <span class="packet-text">"You're a really good friend."</span>
+            </div>
+
+            <div class="packet fire">
+                <span class="packet-label">FIRE</span>
+                <span class="packet-text">"Let's get some quesadillas!"</span>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="celebrate()">BAJA BLAST OFF!</button>
+    </div>
+
+    <script>
+        function celebrate() {
+            for(let i=0; i<60; i++) {
+                let item = document.createElement('div');
+                item.className = 'falling-item';
+                
+                // Randomly mix confetti and quesadilla-ish icons
+                const items = ['🌮', '✨', '💜', '🌯', '🧀'];
+                item.innerHTML = items[Math.floor(Math.random() * items.length)];
+
+                // If it's a "sparkle", let's make it a Taco Bell color instead
+                if(item.innerHTML === '✨') {
+                    item.style.color = ['#702082', '#ffcd00', '#00e5d1', '#c41230'][Math.floor(Math.random() * 4)];
+                }
+
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                document.body.appendChild(item);
+
+                setTimeout(() => item.remove(), 5000);
+            }
+        }
+        
+        // Auto-run a small burst on load
+        window.onload = () => setTimeout(celebrate, 500);
+    </script>
+</body>
+</html>
