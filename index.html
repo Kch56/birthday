@@ -15,96 +15,88 @@
         }
 
         body {
-            /* This fixes the background visibility on mobile */
             background-color: #f3f3f3; 
             font-family: 'Arial Black', sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            /* Changed from hidden to allow scrolling if needed */
-            overflow-x: hidden;
-            overflow-y: auto; 
-            padding: 40px 0;
+            overflow: hidden; /* Kept hidden to keep it a clean 'gift' look */
         }
 
         .card {
             background: white;
             width: 85%;
-            max-width: 400px;
-            padding: 35px 20px;
-            border-radius: 30px;
+            max-width: 380px;
+            padding: 20px 15px; /* Reduced padding to save space */
+            border-radius: 25px;
             text-align: center;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
-            border-top: 15px solid var(--tb-purple);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 12px solid var(--tb-purple);
             position: relative;
             z-index: 10;
         }
 
         h1 {
             color: var(--tb-purple);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             margin: 0;
             text-transform: uppercase;
         }
 
         .name {
             color: var(--tb-purple);
-            font-size: 3rem;
+            font-size: 2.5rem;
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             line-height: 1;
         }
 
         .main-message {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Smaller text to save room */
             color: #444;
-            line-height: 1.5;
-            margin-bottom: 25px;
+            line-height: 1.4;
+            margin: 10px 0 15px 0;
             font-weight: 500;
         }
 
-        /* Sauce Packet Styling */
         .sauce-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 15px;
         }
 
         .packet {
-            height: 85px;
-            border-radius: 12px;
+            height: 70px; /* Shorter packets */
+            border-radius: 10px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            padding: 10px;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+            padding: 5px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
         .packet-label {
             position: absolute;
-            top: 6px;
-            left: 12px;
-            font-size: 0.6rem;
+            top: 5px;
+            left: 10px;
+            font-size: 0.55rem;
             font-weight: bold;
-            letter-spacing: 2px;
-            font-family: sans-serif;
-            opacity: 0.9;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
         .packet-text {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: bold;
             font-style: italic;
             text-align: center;
             max-width: 85%;
-            line-height: 1.2;
         }
 
         .fire { background-color: var(--tb-fire); transform: rotate(1deg); }
@@ -114,28 +106,22 @@
         .btn {
             background-color: var(--baja);
             color: #005a52;
-            padding: 18px;
+            padding: 12px;
             border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1rem;
             cursor: pointer;
             font-weight: 900;
             width: 100%;
-            box-shadow: 0 5px 0px #00a89a;
-            transition: all 0.1s;
-        }
-
-        .btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0px #00a89a;
+            box-shadow: 0 4px 0px #00a89a;
         }
 
         .falling-item {
-            position: fixed; /* Fixed so it doesn't move with scroll */
+            position: fixed;
             top: -50px;
             z-index: 5;
             pointer-events: none;
-            font-size: 30px;
+            font-size: 25px;
         }
 
         @keyframes fall {
@@ -150,8 +136,8 @@
         <span class="name">SOPHIA</span>
         
         <p class="main-message">
-            Wishing you a day that’s better than a perfectly toasted chicken quesadilla and a cold Baja Blast. 
-            You're a really good friend, and I can't wait to celebrate with a massive Taco Bell run soon. 
+            Wishing you a day that’s better than a toasted chicken quesadilla and a cold Baja Blast. 
+            You're a really good friend! 
             <strong>Live More!</strong>
         </p>
 
@@ -160,15 +146,13 @@
                 <span class="packet-label">MILD</span>
                 <span class="packet-text">"Hope your day is awesome!"</span>
             </div>
-
             <div class="packet hot">
                 <span class="packet-label">HOT</span>
                 <span class="packet-text">"You're a really good friend."</span>
             </div>
-
             <div class="packet fire">
                 <span class="packet-label">FIRE</span>
-                <span class="packet-text">"Let's get some chicken quesadillas to celebrate!"</span>
+                <span class="packet-text">"Let's get some quesadillas!"</span>
             </div>
         </div>
         
@@ -177,25 +161,20 @@
 
     <script>
         function celebrate() {
-            for(let i=0; i<60; i++) {
+            for(let i=0; i<50; i++) {
                 let item = document.createElement('div');
                 item.className = 'falling-item';
-                
                 const items = ['🌮', '✨', '💜', '🌯', '🧀'];
                 item.innerHTML = items[Math.floor(Math.random() * items.length)];
-
                 if(item.innerHTML === '✨') {
                     item.style.color = ['#702082', '#ffcd00', '#00e5d1', '#c41230'][Math.floor(Math.random() * 4)];
                 }
-
                 item.style.left = Math.random() * 100 + 'vw';
                 item.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
                 document.body.appendChild(item);
-
                 setTimeout(() => item.remove(), 5000);
             }
         }
-        
         window.onload = () => setTimeout(celebrate, 500);
     </script>
 </body>
